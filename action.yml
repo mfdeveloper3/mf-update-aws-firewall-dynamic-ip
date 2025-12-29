@@ -1,0 +1,20 @@
+name: 'AWS Firewall Toggle'
+description: 'Adds or removes an IP from an AWS Security Group'
+inputs:
+  action:
+    description: 'add or remove'
+    required: true
+  sg_id:
+    description: 'AWS Security Group ID'
+    required: true
+  ip:
+    description: 'IP address to whitelist'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Execute Firewall Script
+      shell: bash
+      run: |
+        chmod +x ${{ github.action_path }}/aws-firewall.sh
+        ${{ github.action_path }}/aws-firewall.sh ${{ inputs.action }} ${{ inputs.sg_id }} ${{ inputs.ip }}
