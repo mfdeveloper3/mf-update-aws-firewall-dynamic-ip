@@ -4,6 +4,7 @@
 ACTION=$1          # 'add' or 'remove'
 SG_ID=$2           # Your AWS Security Group ID (replaces Firewall ID)
 IP_ADDRESS=$3      # The IP address (e.g., 1.2.3.4)
+AWS_REGION="us-west-1"
 
 # Validate inputs
 if [[ -z "$ACTION" || -z "$SG_ID" || -z "$IP_ADDRESS" ]]; then
@@ -20,6 +21,7 @@ CIDR="$IP_ADDRESS/32"
 add_rule() {
     echo "Adding IP $CIDR to Security Group $SG_ID on port 22..."
     aws ec2 authorize-security-group-ingress \
+		--region "$AWS_REGION" \
         --group-id "$SG_ID" \
         --protocol tcp \
         --port 22 \
@@ -30,6 +32,7 @@ add_rule() {
 remove_rule() {
     echo "Removing IP $CIDR from Security Group $SG_ID on port 22..."
     aws ec2 revoke-security-group-ingress \
+		--region "$AWS_REGION" \
         --group-id "$SG_ID" \
         --protocol tcp \
         --port 22 \
