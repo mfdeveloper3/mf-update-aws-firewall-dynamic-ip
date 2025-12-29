@@ -7,6 +7,7 @@ IP_ADDRESS=$3      # The IP address (e.g., 1.2.3.4)
 
 # Validate inputs
 if [[ -z "$ACTION" || -z "$SG_ID" || -z "$IP_ADDRESS" ]]; then
+    echo "Current inputs: $0 $1 $2 $3"
     echo "Usage: $0 <add|remove> <security_group_id> <ip_address>"
     exit 1
 fi
