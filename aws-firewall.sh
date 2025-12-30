@@ -25,8 +25,7 @@ add_rule() {
         --group-id "$SG_ID" \
         --protocol tcp \
         --port 22 \
-        --cidr "$CIDR" \
-        --description "Github Action Temp Access"
+        --cidr "$CIDR" 
 }
 
 remove_rule() {
